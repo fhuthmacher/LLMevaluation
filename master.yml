@@ -97,7 +97,8 @@ Resources:
         - 'arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess'
         - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
         - 'arn:aws:iam::aws:policy/IAMFullAccess'
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+        - 'arn:aws:iam::aws:policy/AmazonSageMakerFullAccess'
 
   SageMakerExecutionRole:
     Type: AWS::IAM::Role
