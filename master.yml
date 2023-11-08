@@ -979,17 +979,17 @@ Resources:
                   )
                   print('response_sm_profile: ' + str(response_sm_profile) )
 
-                  response = smclient.update_domain(
-                    DomainId=domain_id,
-                    DefaultUserSettings={
-                            'CodeRepositories': [
-                                {
-                                    'RepositoryUrl': git_repo
-                                }
-                            ]
-                    }
-                  )
-                  print("created domain update: " + str(response))
+                  #response = smclient.update_domain(
+                  #  DomainId=domain_id,
+                  #  DefaultUserSettings={
+                  #          'CodeRepositories': [
+                  #              {
+                  #                  'RepositoryUrl': git_repo
+                  #              }
+                  #          ]
+                  #  }
+                  #)
+                  #print("created domain update: " + str(response))
                 except Exception as e:
                   print(str(e))
                   if e.response['Error']['Code'] == 'ResourceNotFound':
