@@ -899,7 +899,7 @@ Resources:
               import urllib3
               import shutil
               import time
-              
+              import base64
 
               def empty_bucket(bucket_name,region_name,account_id):
                   try:
@@ -989,7 +989,7 @@ Resources:
                     }
                   )
                   print("created domain update: " + str(response))
-                except ClientError as e:
+                except Exception as e:
                   print(str(e))
                   if e.response['Error']['Code'] == 'ResourceNotFound':
                       print("SageMaker Studio domain not found.")
