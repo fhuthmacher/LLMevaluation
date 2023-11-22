@@ -255,7 +255,11 @@ Resources:
           import json
           import boto3
           import cfnresponse
+          import logging
 
+          logger = logging.getLogger()
+          logger.setLevel(logging.INFO)
+          
           ec2 = boto3.client('ec2')
 
           def lambda_handler(event, context):              
@@ -267,8 +271,13 @@ Resources:
                   cfnresponse.send(event, context, cfnresponse.SUCCESS, {},'')
 
           def get_default_vpc_id():
-              vpcs = ec2.describe_vpcs(Filters=[{'Name': 'is-default', 'Values': ['true']}])
-              vpcs = vpcs['Vpcs']
+              vpcs = ec2.describe_vpcs(Filters=[{'Name': 'is-default', 'Values': ['true']}])              
+              logger.info(f'default vpcs :  {vpcs}')
+              vpcs = vpcs['Vpcs'] 
+              if len(vpcs) < 1:
+                  vpcs = ec2.describe_vpcs()
+                  logger.info(f'all vpcs :  {vpcs}')
+                  vpcs = vpcs['Vpcs']
               vpc_id = vpcs[0]['VpcId']
               return vpc_id
 
@@ -282,6 +291,7 @@ Resources:
                       }
                   ]
               )
+              logger.info(f'subnets for vpc-id {vpcId} :  {response}')
               subnet_ids = []
               for subnet in response['Subnets']:
                   subnet_ids.append(subnet['SubnetId'])
